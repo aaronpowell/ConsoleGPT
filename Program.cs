@@ -37,6 +37,7 @@ hostBuilder.ConfigureServices((context, services) =>
     services.AddHostedService<ConsoleGPTService>();
 
     services.AddSingleton<IInputSkill, ConsoleInputSkill>();
+    services.AddSingleton<IOutputSkill, ConsoleOutputSkill>();
     services.AddSingleton<ChatSkill>();
 });
 

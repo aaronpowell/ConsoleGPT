@@ -12,18 +12,21 @@ internal class ConsoleGPTService : IHostedService
     private readonly IHostApplicationLifetime lifeTime;
     private readonly IDictionary<string, ISKFunction> inputSkillFunctions;
     private readonly IDictionary<string, ISKFunction> chatSkillFunctions;
+    private readonly IDictionary<string, ISKFunction> outputSkillFunctions;
 
     public ConsoleGPTService(
         IKernel kernel,
         IHostApplicationLifetime lifeTime,
         ChatSkill chatSkill,
-        IInputSkill inputSkill)
+        IInputSkill inputSkill,
+        IOutputSkill outputSkill)
     {
         this.kernel = kernel;
         this.lifeTime = lifeTime;
 
         inputSkillFunctions = kernel.ImportSkill(inputSkill);
         chatSkillFunctions = kernel.ImportSkill(chatSkill);
+        outputSkillFunctions = kernel.ImportSkill(outputSkill);
     }
 
     public async Task StartAsync(CancellationToken cancellationToken)
@@ -31,7 +34,7 @@ internal class ConsoleGPTService : IHostedService
         await kernel.RunAsync(
             "Beep, boop, I'm .DotNetBot and I'm here to help. If you're done say goodbye.",
             cancellationToken,
-            inputSkillFunctions[nameof(IInputSkill.Respond)]
+            outputSkillFunctions[nameof(IOutputSkill.Respond)]
         );
 
         while (!cancellationToken.IsCancellationRequested)
@@ -39,7 +42,7 @@ internal class ConsoleGPTService : IHostedService
             ISKFunction[] pipeline = {
                 inputSkillFunctions[nameof(IInputSkill.Listen)],
                 chatSkillFunctions[nameof(ChatSkill.Prompt)],
-                inputSkillFunctions[nameof(IInputSkill.Respond)]
+                outputSkillFunctions[nameof(IOutputSkill.Respond)]
             };
 
             await kernel.RunAsync(pipeline);

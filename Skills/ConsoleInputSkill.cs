@@ -26,15 +26,6 @@ internal class ConsoleInputSkill : IInputSkill
     }
 
     [SKFunction]
-    public Task<string> Respond(string message, SKContext context)
-    {
-        return Task.Run(() => {
-            WriteAIResponse(message);
-            return message;
-        });
-    }
-
-    [SKFunction]
     public Task<string> IsGoodbye(SKContext context)
     {
         return Task.FromResult(_isGoodbye ? "true" : "false");
