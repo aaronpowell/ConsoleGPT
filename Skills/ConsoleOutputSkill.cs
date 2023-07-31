@@ -5,8 +5,8 @@ namespace ConsoleGPT.Skills;
 
 internal class ConsoleOutputSkill : IOutputSkill
 {
-    [SKFunction]
-    public async Task<string> Respond(string message, SKContext context)
+    [SKFunction, SKName(nameof(RespondAsync))]
+    public async Task<string> RespondAsync(string message, SKContext context)
     {
         await WriteAIResponse(message);
         return message;

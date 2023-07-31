@@ -3,6 +3,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.Orchestration;
 using Microsoft.SemanticKernel.SkillDefinition;
+using Microsoft.SemanticKernel.Skills.Core;
 
 namespace ConsoleGPT;
 
@@ -13,13 +14,15 @@ internal class ConsoleGPTService : IHostedService
     private readonly IDictionary<string, ISKFunction> inputSkillFunctions;
     private readonly IDictionary<string, ISKFunction> chatSkillFunctions;
     private readonly IDictionary<string, ISKFunction> outputSkillFunctions;
+    private readonly IDictionary<string, ISKFunction> textSkillFunctions;
 
     public ConsoleGPTService(
         IKernel kernel,
         IHostApplicationLifetime lifeTime,
         ChatSkill chatSkill,
         IInputSkill inputSkill,
-        IOutputSkill outputSkill)
+        IOutputSkill outputSkill,
+        TextSkill textSkill)
     {
         this.kernel = kernel;
         this.lifeTime = lifeTime;
@@ -27,6 +30,7 @@ internal class ConsoleGPTService : IHostedService
         inputSkillFunctions = kernel.ImportSkill(inputSkill);
         chatSkillFunctions = kernel.ImportSkill(chatSkill);
         outputSkillFunctions = kernel.ImportSkill(outputSkill);
+        textSkillFunctions = kernel.ImportSkill(textSkill);
     }
 
     public async Task StartAsync(CancellationToken cancellationToken)
@@ -34,23 +38,25 @@ internal class ConsoleGPTService : IHostedService
         await kernel.RunAsync(
             "Beep, boop, I'm .DotNetBot and I'm here to help. If you're done say goodbye.",
             cancellationToken,
-            outputSkillFunctions[nameof(IOutputSkill.Respond)]
+            outputSkillFunctions[nameof(IOutputSkill.RespondAsync)]
         );
 
         while (!cancellationToken.IsCancellationRequested)
         {
             ISKFunction[] pipeline = {
-                inputSkillFunctions[nameof(IInputSkill.Listen)],
-                chatSkillFunctions[nameof(ChatSkill.Prompt)],
-                outputSkillFunctions[nameof(IOutputSkill.Respond)]
+                inputSkillFunctions[nameof(IInputSkill.ListenAsync)],
+                textSkillFunctions[nameof(TextSkill.TrimStart)],
+                textSkillFunctions[nameof(TextSkill.TrimEnd)],
+                chatSkillFunctions[nameof(ChatSkill.PromptAsync)],
+                outputSkillFunctions[nameof(IOutputSkill.RespondAsync)]
             };
 
             await kernel.RunAsync(pipeline);
 
-            SKContext goodbyeContext = await kernel.RunAsync(cancellationToken, inputSkillFunctions[nameof(IInputSkill.IsGoodbye)]);
-            if (goodbyeContext.Result == "true")
+            SKContext goodbyeContext = await kernel.RunAsync(cancellationToken, inputSkillFunctions[nameof(IInputSkill.IsGoodbyeAsync)]);
+            if (bool.TryParse(goodbyeContext.Result, out bool result) && result)
             {
-                await kernel.RunAsync(cancellationToken, chatSkillFunctions[nameof(ChatSkill.LogChatHistory)]);
+                await kernel.RunAsync(cancellationToken, chatSkillFunctions[nameof(ChatSkill.LogChatHistoryAsync)]);
                 break;
             }
         }

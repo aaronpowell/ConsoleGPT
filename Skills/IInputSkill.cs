@@ -7,10 +7,10 @@ internal interface IInputSkill
     /// <summary>
     /// Gets input from the user
     /// </summary>
-    public Task<string> Listen(SKContext context);
+    public Task<string> ListenAsync(SKContext context);
 
     /// <summary>
     /// Gets if Listen function detected goodbye from the user
     /// </summary>
-    public Task<string> IsGoodbye(SKContext context);
+    public Task<bool> IsGoodbyeAsync(SKContext context);
 }

@@ -28,17 +28,29 @@ internal class ChatSkill
         chatHistory = chatCompletion.CreateNewChat(s.SystemPrompt);
     }
 
-
-    [SKFunction]
-    public async Task<string> Prompt(string prompt)
+    [SKFunction, SKName(nameof(PromptAsync))]
+    public async Task<string> PromptAsync(string prompt)
     {
-        string reply;
+        string reply = string.Empty;
         try
         {
             // Add the question as a user message to the chat history, then send everything to OpenAI.
             // The chat history is used as context for the prompt
             chatHistory.AddUserMessage(prompt);
-            reply = await chatCompletion.GenerateMessageAsync(chatHistory, chatRequestSettings);
+            IReadOnlyList<IChatResult> completion =
+                await chatCompletion.GetChatCompletionsAsync(chatHistory, chatRequestSettings);
+
+            if (!completion.Any())
+                throw new AIException(AIException.ErrorCodes.NoResponse, "No completion results returned from OpenAI.");
+
+            foreach (IChatResult result in completion)
+            {
+                // Add the completion result as an assistant message to the chat history.
+                ChatMessageBase message = await result.GetChatMessageAsync();
+                chatHistory.AddAssistantMessage(message.Content);
+
+                reply += Environment.NewLine + message.Content;
+            }
 
             // Add the interaction to the chat history.
             chatHistory.AddAssistantMessage(reply);
@@ -52,8 +64,8 @@ internal class ChatSkill
         return reply;
     }
 
-    [SKFunction]
-    public async Task LogChatHistory()
+    [SKFunction, SKName(nameof(LogChatHistoryAsync))]
+    public async Task LogChatHistoryAsync()
     {
         await Console.Out.WriteLineAsync();
         await Console.Out.WriteLineAsync("Chat history:");

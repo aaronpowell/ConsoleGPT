@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Microsoft.SemanticKernel;
+using Microsoft.SemanticKernel.Skills.Core;
 
 IHostBuilder hostBuilder = Host.CreateDefaultBuilder(args);
 
@@ -36,9 +37,13 @@ hostBuilder.ConfigureServices((context, services) =>
 
     services.AddHostedService<ConsoleGPTService>();
 
+    // Custom skills
     services.AddSingleton<IInputSkill, ConsoleInputSkill>();
     services.AddSingleton<IOutputSkill, ConsoleOutputSkill>();
     services.AddSingleton<ChatSkill>();
+
+    // Built-in skills
+    services.AddSingleton<TextSkill>();
 });
 
 await hostBuilder.Build().RunAsync();
