@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "ConsoleGPT.OpenAISdk": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENV": "Development"
+      }
+    }
+  }
+}

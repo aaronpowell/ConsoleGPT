@@ -5,6 +5,10 @@ VisualStudioVersion = 17.8.33923.129
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleGPT.SemanticKernelDemo", "SemanticKernelDemo\ConsoleGPT.SemanticKernelDemo.csproj", "{118085B5-A1E5-4523-A023-4D2EEBA135F2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleGPT.OpenAISdk", "ConsoleGPT.OpenAISdk\ConsoleGPT.OpenAISdk.csproj", "{29DF1D23-C3A0-4B73-8194-B97333B0F5F1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{E186EAEE-3D1F-412D-8873-CEDC41030522}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{118085B5-A1E5-4523-A023-4D2EEBA135F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{118085B5-A1E5-4523-A023-4D2EEBA135F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{118085B5-A1E5-4523-A023-4D2EEBA135F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29DF1D23-C3A0-4B73-8194-B97333B0F5F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29DF1D23-C3A0-4B73-8194-B97333B0F5F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29DF1D23-C3A0-4B73-8194-B97333B0F5F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29DF1D23-C3A0-4B73-8194-B97333B0F5F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E186EAEE-3D1F-412D-8873-CEDC41030522}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E186EAEE-3D1F-412D-8873-CEDC41030522}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E186EAEE-3D1F-412D-8873-CEDC41030522}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E186EAEE-3D1F-412D-8873-CEDC41030522}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,6 +1,6 @@
 ﻿namespace ConsoleGPT;
 
-internal class Settings
+public class Settings
 {
     public string Key { get; set; } = string.Empty;
 
@@ -24,10 +24,4 @@ internal class Settings
     public float FrequencyPenalty { get; set; }
 
     public float PresencePenalty { get; set; }
-}
-
-internal enum OpenAIType
-{
-    Azure,
-    OpenAI
 }
