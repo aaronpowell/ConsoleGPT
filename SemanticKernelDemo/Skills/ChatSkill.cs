@@ -51,9 +51,6 @@ internal class ChatSkill
 
                 reply += Environment.NewLine + message.Content;
             }
-
-            // Add the interaction to the chat history.
-            chatHistory.AddAssistantMessage(reply);
         }
         catch (AIException aiex)
         {

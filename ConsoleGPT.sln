@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.33923.129
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleGPT", "ConsoleGPT.csproj", "{118085B5-A1E5-4523-A023-4D2EEBA135F2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleGPT.SemanticKernelDemo", "SemanticKernelDemo\ConsoleGPT.SemanticKernelDemo.csproj", "{118085B5-A1E5-4523-A023-4D2EEBA135F2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
