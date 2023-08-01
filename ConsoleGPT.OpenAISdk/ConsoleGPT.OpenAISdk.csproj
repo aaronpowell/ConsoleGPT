@@ -8,6 +8,11 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <Content Include="..\appsettings.Development.json" />
+      <Content Include="..\appsettings.json" />
+    </ItemGroup>
+
+    <ItemGroup>
         <PackageReference Include="Azure.AI.OpenAI" Version="1.0.0-beta.6" />
         <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0-preview.6.23329.7" />
     </ItemGroup>
