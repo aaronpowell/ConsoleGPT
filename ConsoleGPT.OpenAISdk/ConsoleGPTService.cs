@@ -20,7 +20,8 @@ internal class ConsoleGPTService : IHostedService
     {
         Settings s = settings.Value;
 
-        bool goodbye = false; ChatCompletionsOptions completionsOptions = new()
+        bool goodbye = false;
+        ChatCompletionsOptions completionsOptions = new()
         {
             MaxTokens = s.MaxTokens,
             Temperature = s.Temperature,

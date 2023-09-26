@@ -23,7 +23,7 @@ hostBuilder.ConfigureServices((context, services) =>
 
         OpenAIClient client = settings.Type == OpenAIType.Azure
             ? new OpenAIClient(new Uri(settings.Endpoint!), new AzureKeyCredential(settings.Key))
-            : new OpenAIClient(settings.Endpoint!);
+            : new OpenAIClient(settings.Key!);
 
         return client;
     });
