@@ -3,7 +3,7 @@
     "ConsoleGPT": {
       "commandName": "Project",
       "environmentVariables": {
-        "DOTNET_ENV": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development"
       }
     }
   }

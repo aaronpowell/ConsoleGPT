@@ -9,7 +9,7 @@ using Microsoft.Extensions.Options;
 IHostBuilder hostBuilder = Host.CreateDefaultBuilder(args);
 
 hostBuilder.ConfigureAppConfiguration((builder) => builder
-    .AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("DOTNET_ENV")}.json", true, true)
+    .AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json", true, true)
     .AddEnvironmentVariables()
     .AddUserSecrets<Program>());
 
