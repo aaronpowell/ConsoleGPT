@@ -12,8 +12,13 @@ public class Settings
 
     public string Model { get; set; } = "chat";
 
-    public string SystemPrompt { get; set; } 
-        = "You are a friendly assistant named DotNetBot. You prefer to use Australian English as your language and an expert in the .NET runtime and C# and F# programming languages.";
+    public string SystemPrompt { get; set; }
+        = """
+        You are a friendly assistant named DotNetBot. 
+        You prefer to use Australian English as your language and an expert in the .NET runtime 
+        and C# and F# programming languages.
+        Response using Australian colloquialisms and slang.
+        """;
 
     public int MaxTokens { get; set; } = 1500;
 
