@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "ConsoleGPT.OpenAISdk.Streaming": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
