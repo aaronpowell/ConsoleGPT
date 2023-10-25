@@ -4,9 +4,10 @@
 
 This is a demo application showing how you can build a ChatGPT like experience using [Azure OpenAI Service](https://azure.microsoft.com/services/cognitive-services/openai-text-generation/).
 
-There are two demo applications:
+There are three demo applications:
 
 - [ConsoleGPT.OpenAISdk](./ConsoleGPT.OpenAISdk) - This is a demo application using the [Azure OpenAI SDK](https://learn.microsoft.com/dotnet/api/overview/azure/ai.openai-readme?view=azure-dotnet-preview) directly
+- [ConsoleGPT.OpenAISdk.Streaming](./ConsoleGPT.OpenAISdk.Streaming) - Same as the first demo but uses a streaming response (with simulated network latency)
 - [ConsoleGPT.SemanticKernelDemo](./ConsoleGPT.SemanticKernelDemo) - This is a demo application using the [Semantic Kernel](https://learn.microsoft.com/semantic-kernel/overview/) to orchestarte the Azure OpenAI Service
 
 _Note: While these demos refer to Azure OpenAI Service, OpenAI can also be used directly._
